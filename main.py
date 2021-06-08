@@ -1,20 +1,40 @@
 from decimal import *
 
+from datetime import datetime
 
-dzienTygodnia = ("Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday")
+class Parkomat:
 
-class Pieniadze():
+    def __init__(self):
+        self._List_Money = []
+        self._Actual_Time = datetime.now()
+        self._Leaving_Time = self._Actual_Time
+        self._Registration = ''
+        self._Sum = 0
 
-    def __init__(self, val):
-        val = Decimal(float(val)).quantize(Decimal('.01'), rounding = ROUND_DOWN)
-        nominaly = list(map(Decimal, ['0.01', '0.02', '0.05', \
-                                     '0.1', '0.2', '0.5', '1', '2', '5', '10', '20', '50']))
-        if val in nominaly:
-            self._val = val
+
+def counting_coins(self, value, number):
+
+
+class Coin():
+
+    List_Money = [0.01, 0.02, 0.05, 0.1, 0.2, 0.5, 1, 2, 5, 10, 20, 50]
+
+
+class Money(Coin):
+
+    def __init__(self, value):
+        super().__init__()
+        if value in self.List.Money:
+            self._Value = Decimal(str(value))
         else:
-            raise Exception
+            self._Value = Decimal('0')
+            print('Unknown coin')
+        self._Currency = 'PLN'
 
-    def get_val(self):
-        return self._val
+    def get_value(self):
+        return self.value
+
+    def get_currency(self):
+        return self._Currency
 
 
