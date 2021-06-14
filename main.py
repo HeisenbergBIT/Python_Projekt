@@ -29,6 +29,7 @@ class Money(Coin):
         else:
             self._Value = Decimal('0')
             print('Unknown coin')
+            raise ZlyNominalException
         self._Currency = 'PLN'
 
     def get_value(self):
