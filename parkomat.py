@@ -1,9 +1,10 @@
 from decimal import *
 from myexceptions import *
-
+from re import compile
 from datetime import datetime
 from datetime import timedelta
 
+getcontext().prec = 3
 
 class Coin():
 
@@ -38,12 +39,13 @@ class Money(Coin):
 class Parkomat:
 
     def __init__(self):
-        self._Leaving_Time = self._Actual_Time
-        self._Actual_Time = datetime.now()
-        self._Registration = ''
         self._ListOfCoins = []
-        self._Number_Value = {0.01: 0, 0.02: 0, 0.05: 0, 0.1: 0, 0.2: 0, 0.5: 0, 1: 0, 2: 0, 5: 0}
+        self._Actual_Time = datetime.now()
+        self._Leaving_Time = self._Actual_Time
+        self._Registration = ''
         self._Sum = 0
+        self._Number_Value = {0.01:0, 0.02:0, 0.05:0, 0.1:0, 0.2:0, 0.5:0, 1:0, 2:0, 5:0}
+
 
 
     def counting_coins(self, value, number):
@@ -57,7 +59,7 @@ class Parkomat:
                 if value < Decimal(str(10)):
                     self._Number_Value[value] = number
 
-                    if self._Number_Value[value] > 150:
+                    if self._Number_Value[value] > 200:
                         raise ParkomatOverflow
 
 
@@ -75,7 +77,7 @@ class Parkomat:
 
     def leaving_time(self, seconds):
 
-        tillwhen = self._Leaving_Time.weekday()
+
 
         if self._Leaving_Time.hour >= 20:
             sek = self._Leaving_Time.second
@@ -86,6 +88,8 @@ class Parkomat:
 
         if self._Leaving_Time.hour < 8:
             self._Leaving_Time = self._Leaving_Time.replace(hour=8, minute=0, second=0)
+
+        tillwhen = self._Leaving_Time.weekday()
 
         if tillwhen == 5:
             sek = self._Leaving_Time.second
@@ -134,7 +138,7 @@ class Parkomat:
                 else:
                     self.leaving_time(7.2)
 
-        self.number_coins_checking(coin, number)
+        self.counting_coins(coin, number)
 
 
     def get_license_plate(self, value):
@@ -142,16 +146,17 @@ class Parkomat:
         value = value.rstrip('\n')
         format = compile("^[\w\ ]*$")
 
-        if format.match(value) is not None and 3 < len(value) <= 10 and value:
+        if format.match(value) is not None and 4 < len(
+                value) <= 11 and value:
 
             value = value.replace(' ', '').upper()
 
-            self._registration = value
+            self._rejestracja = value
 
         else:
             raise WrongLicensePlate
 
-        return self._registration
+        return self._rejestracja
 
 
     def actual_time_change(self, year, month, day, hour, minutes, seconds):
@@ -176,7 +181,7 @@ class Parkomat:
         return self._Leaving_Time
 
 
-    """def confirm(self,license_plate):
+    def confirm(self,license_plate):
 
         self.get_license_plate(license_plate)
 
@@ -190,4 +195,4 @@ class Parkomat:
 
         self._Leaving_Time = self._Actual_Time
 
-        return lic"""
+        return lic
