@@ -15,6 +15,7 @@ title = Label(window, text = 'Parkomat Box')
 title.config( font=('Arial', 30,))
 title.pack()
 
+
 def number_of_coins(coin_button):
     return number_of_coins_spinbox.get()
 
@@ -152,7 +153,7 @@ def actual_date():
                             int(window.date[5]))
 
 
-Label(window, text="Date change (should insert into format YYYY MM DD HH MM SS:)").place(x=160, y=140)
+Label(window, text="Date change (should insert into format yyyy mm dd hh mm ss)").place(x=160, y=140)
 
 new_date_typed = Text(window, height=1, width=25)
 new_date_typed.place(x=180, y=165)
@@ -174,4 +175,3 @@ confirm_button = Button(window, height=5, width=50, background='green', text='Co
 
 
 
-window.mainloop()

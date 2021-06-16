@@ -4,7 +4,6 @@ from re import compile
 from datetime import datetime
 from datetime import timedelta
 
-getcontext().prec = 3
 
 class Coin():
 
@@ -76,7 +75,6 @@ class Parkomat:
 
 
     def leaving_time(self, seconds):
-
 
 
         if self._Leaving_Time.hour >= 20:
